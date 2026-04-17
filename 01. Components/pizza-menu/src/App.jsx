@@ -1,6 +1,6 @@
 function Header() {
     return (
-        <header>
+        <header className="header">
             <h1>Fast React Pizza Co.</h1>
         </header>
     );
@@ -18,7 +18,7 @@ function Pizza() {
 
 function Menu() {
     return (
-        <main>
+        <main className="menu">
             <h2>Menu</h2>
             <Pizza />
         </main>
@@ -26,12 +26,12 @@ function Menu() {
 }
 
 function Footer() {
-    return <footer>We are currently open</footer>;
+    return <footer className="footer">We are currently open</footer>;
 }
 
 function App() {
     return (
-        <div>
+        <div className="container">
             <Header />
             <Menu />
             <Footer />
