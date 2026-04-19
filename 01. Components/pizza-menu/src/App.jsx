@@ -35,12 +35,14 @@ function Menu() {
                 voluptas quae perspiciatis eveniet incidunt explicabo, inventore
                 aliquam modi?
             </p>
-            {numPizzas > 0 && (
+            {numPizzas > 0 ? (
                 <ul className="pizzas">
                     {pizzas.map((pizza) => (
                         <Pizza key={pizza.name} pizzaObj={pizza} />
                     ))}
                 </ul>
+            ) : (
+                <p>We are still working on our menu. Please come back later</p>
             )}
         </main>
     );
@@ -48,17 +50,25 @@ function Menu() {
 
 function Footer() {
     const hour = new Date().getHours();
-    const openHour = 10;
+    const openHour = 12;
     const closeHour = 22;
     const isOpen = hour >= openHour && hour <= closeHour;
 
     return (
         <footer className="footer">
-            {isOpen && (
+            {isOpen ? (
                 <div className="order">
-                    <p>We are OPEN until {closeHour}:00</p>
+                    <p>
+                        We are OPEN until {closeHour}:00. Come visit us or order
+                        online
+                    </p>
                     <button className="btn">Order Online</button>
                 </div>
+            ) : (
+                <p>
+                    We are happy to welcome you between {openHour}:00 and{" "}
+                    {closeHour}:00
+                </p>
             )}
         </footer>
     );
