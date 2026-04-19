@@ -9,8 +9,7 @@ function Header() {
 }
 
 function Pizza(props) {
-
-    if(props.pizzaObj.soldOut) return null;
+    if (props.pizzaObj.soldOut) return null;
 
     return (
         <li className="pizza">
@@ -51,6 +50,27 @@ function Menu() {
     );
 }
 
+function Order(props) {
+    return (
+        <div className="order">
+            <p>
+                We are OPEN until {props.closeHour}:00. Come visit us or order
+                online
+            </p>
+            <button className="btn">Order Online</button>
+        </div>
+    );
+}
+
+function Notice(props) {
+    return (
+        <p>
+            We are happy to welcome you between {props.openHour}:00 and{" "}
+            {props.closeHour}:00
+        </p>
+    );
+}
+
 function Footer() {
     const hour = new Date().getHours();
     const openHour = 12;
@@ -60,18 +80,9 @@ function Footer() {
     return (
         <footer className="footer">
             {isOpen ? (
-                <div className="order">
-                    <p>
-                        We are OPEN until {closeHour}:00. Come visit us or order
-                        online
-                    </p>
-                    <button className="btn">Order Online</button>
-                </div>
+                <Order closeHour={closeHour} />
             ) : (
-                <p>
-                    We are happy to welcome you between {openHour}:00 and{" "}
-                    {closeHour}:00
-                </p>
+                <Notice closeHour={openHour} openHour={openHour} />
             )}
         </footer>
     );
