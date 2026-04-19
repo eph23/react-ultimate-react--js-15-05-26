@@ -31,18 +31,21 @@ function Menu() {
     return (
         <main className="menu">
             <h2>Our Menu</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Sapiente repudiandae sunt quas accusamus et officiis dicta
-                voluptas quae perspiciatis eveniet incidunt explicabo, inventore
-                aliquam modi?
-            </p>
+
             {numPizzas > 0 ? (
-                <ul className="pizzas">
-                    {pizzas.map((pizza) => (
-                        <Pizza key={pizza.name} pizzaObj={pizza} />
-                    ))}
-                </ul>
+                <>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Sapiente repudiandae sunt quas accusamus et officiis
+                        dicta voluptas quae perspiciatis eveniet incidunt
+                        explicabo, inventore aliquam modi?
+                    </p>
+                    <ul className="pizzas">
+                        {pizzas.map((pizza) => (
+                            <Pizza key={pizza.name} pizzaObj={pizza} />
+                        ))}
+                    </ul>
+                </>
             ) : (
                 <p>We are still working on our menu. Please come back later</p>
             )}
