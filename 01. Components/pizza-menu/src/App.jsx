@@ -1,3 +1,5 @@
+import pizzaData from "./data";
+
 function Header() {
     return (
         <header className="header">
@@ -8,27 +10,32 @@ function Header() {
 
 function Pizza(props) {
     return (
-        <div className="pizza">
-            <img src={props.image} alt={props.name} />
+        <li className="pizza">
+            <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
             <div>
-                <h3>{props.name}</h3>
-                <p>{props.ingredients}</p>
-                <span>{props.price + 2}</span>
+                <h3>{props.pizzaObj.name}</h3>
+                <p>{props.pizzaObj.ingredients}</p>
+                <span>{props.pizzaObj.price}</span>
             </div>
-        </div>
+        </li>
     );
 }
 
 function Menu() {
     return (
         <main className="menu">
-            <h2>Menu</h2>
-            <Pizza
-                name="Pizza Spinaci"
-                ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-                image="pizzas/spinaci.jpg"
-                price={10}
-            />
+            <h2>Our Menu</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Sapiente repudiandae sunt quas accusamus et officiis dicta
+                voluptas quae perspiciatis eveniet incidunt explicabo, inventore
+                aliquam modi?
+            </p>
+            <ul className="pizzas">
+                {pizzaData.map((pizza) => (
+                    <Pizza key={pizza.name} pizzaObj={pizza} />
+                ))}
+            </ul>
         </main>
     );
 }
