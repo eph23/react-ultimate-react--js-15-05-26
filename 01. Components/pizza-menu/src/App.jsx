@@ -22,6 +22,10 @@ function Pizza(props) {
 }
 
 function Menu() {
+    const pizzas = pizzaData;
+    // const pizzas = [];
+    const numPizzas = pizzas.length;
+
     return (
         <main className="menu">
             <h2>Our Menu</h2>
@@ -31,17 +35,33 @@ function Menu() {
                 voluptas quae perspiciatis eveniet incidunt explicabo, inventore
                 aliquam modi?
             </p>
-            <ul className="pizzas">
-                {pizzaData.map((pizza) => (
-                    <Pizza key={pizza.name} pizzaObj={pizza} />
-                ))}
-            </ul>
+            {numPizzas > 0 && (
+                <ul className="pizzas">
+                    {pizzas.map((pizza) => (
+                        <Pizza key={pizza.name} pizzaObj={pizza} />
+                    ))}
+                </ul>
+            )}
         </main>
     );
 }
 
 function Footer() {
-    return <footer className="footer">We are currently open</footer>;
+    const hour = new Date().getHours();
+    const openHour = 10;
+    const closeHour = 22;
+    const isOpen = hour >= openHour && hour <= closeHour;
+
+    return (
+        <footer className="footer">
+            {isOpen && (
+                <div className="order">
+                    <p>We are OPEN until {closeHour}:00</p>
+                    <button className="btn">Order Online</button>
+                </div>
+            )}
+        </footer>
+    );
 }
 
 function App() {
