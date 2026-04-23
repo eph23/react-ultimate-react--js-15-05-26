@@ -12,17 +12,17 @@ function App() {
 
     function handlePrevious() {
         if (step > 1) {
-            setStep(step - 1);
+            setStep((currentStep) => currentStep - 1);
         }
     }
     function handleNext() {
         if (step < 3) {
-            setStep(step + 1);
+            setStep((currentStep) => currentStep + 1);
         }
     }
 
     function handleClose() {
-        setIsOpen(() => !isOpen);
+        setIsOpen((open) => !open);
     }
 
     return (
