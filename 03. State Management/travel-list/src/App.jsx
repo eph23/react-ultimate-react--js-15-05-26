@@ -1,12 +1,5 @@
 import { useState } from "react";
 
-const initialItems = [
-    { id: 1, description: "Passports", quantity: 2, packed: false },
-    { id: 2, description: "Socks", quantity: 12, packed: false },
-    { id: 2, description: "Charger", quantity: 2, packed: true },
-    { id: 2, description: "T-Shirts", quantity: 5, packed: true },
-];
-
 function Logo() {
     return (
         <header>
@@ -67,26 +60,30 @@ function Form({ onAddItems }) {
         </form>
     );
 }
-function PackingList({ items }) {
+function PackingList({ items, onDeleteItem }) {
     return (
         <div className="list">
             <ul>
                 {items.map((item) => (
-                    <Item key={`${item.id}${item.description}`} item={item} />
+                    <Item
+                        key={`${item.id}${item.description}`}
+                        onDeleteItem={onDeleteItem}
+                        item={item}
+                    />
                 ))}
             </ul>
         </div>
     );
 }
 
-function Item({ item }) {
+function Item({ item, onDeleteItem }) {
     return (
         <li>
             <span></span>
             <span style={item.packed ? { textDecoration: "line-through" } : {}}>
                 {item.quantity} {item.description}
             </span>
-            <button>❌</button>
+            <button onClick={() => onDeleteItem(item.id)}>❌</button>
         </li>
     );
 }
@@ -100,17 +97,21 @@ function Status() {
 }
 
 function App() {
-    const [items, setItems] = useState(initialItems);
+    const [items, setItems] = useState([]);
 
     function handleAddItems(item) {
         setItems((items) => [...items, item]);
+    }
+
+    function handleDeleteItem(id) {
+        setItems((items) => items.filter((item) => item.id !== id));
     }
 
     return (
         <div className="app">
             <Logo />
             <Form onAddItems={handleAddItems} />
-            <PackingList items={items} />
+            <PackingList items={items} onDeleteItem={handleDeleteItem} />
             <Status />
         </div>
     );
