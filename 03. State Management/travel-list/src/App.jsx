@@ -22,7 +22,6 @@ function Form({ onAddItems }) {
             packed: false,
             id: Date.now(),
         };
-        console.log(newItem);
 
         onAddItems(newItem);
 
@@ -93,10 +92,28 @@ function Item({ item, onDeleteItem, onToggleItem }) {
     );
 }
 
-function Status() {
+function Status({ items }) {
+    if (!items.length) {
+        return (
+            <footer className="stats">
+                Start adding some items to your packing list 🧳
+            </footer>
+        );
+    }
+    const numItems = items.length;
+    const numPacked = items.filter((item) => item.packed).length;
+    const percentage = Math.round((numPacked / numItems) * 100);
+
     return (
         <footer className="stats">
-            <em>You have X items on your list and you already packed X (X%)</em>
+            {percentage === 100 ? (
+                <em>You got everything ready to go 🚀🚀🚀</em>
+            ) : (
+                <em>
+                    You have {numItems} items on your list and you already
+                    packed {numPacked} ({percentage}%)
+                </em>
+            )}
         </footer>
     );
 }
@@ -129,7 +146,7 @@ function App() {
                 onDeleteItem={handleDeleteItem}
                 onToggleItem={handleToggleItem}
             />
-            <Status />
+            <Status items={items} />
         </div>
     );
 }
