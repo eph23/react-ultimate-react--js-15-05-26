@@ -33,7 +33,7 @@ body {
     column-gap: 4rem;
     align-items: start;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    padding: 2rem;
     border-radius: 5px;
 }
 
@@ -59,6 +59,8 @@ body {
     gap: 0.4rem;
     font-size: 1.4rem;
     margin-bottom: 2rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
 }
 
 .sidebar li {
@@ -133,6 +135,7 @@ form {
 
 label {
     font-weight: 500;
+    font-size: 1.2rem;
 }
 
 label::first-letter {
