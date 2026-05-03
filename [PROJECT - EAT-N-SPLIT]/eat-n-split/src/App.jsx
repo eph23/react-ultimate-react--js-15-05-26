@@ -1,9 +1,14 @@
+import { useState } from "react";
 import initialFriends from "./data.js";
 
 /* ******************************************** */
 /*ANCHOR                    BUTTON COMPONENT                   */
-function Button({ children }) {
-    return <button className="button">{children}</button>;
+function Button({ children, onClick }) {
+    return (
+        <button className="button" onClick={onClick}>
+            {children}
+        </button>
+    );
 }
 /* ******************************************** */
 
@@ -90,12 +95,20 @@ function FormSplitBill() {
 /* ******************************************** */
 /*ANCHOR                 APP COMPONENT                */
 function App() {
+    const [showAddFriend, setShowAddFriend] = useState(false);
+
+    function handleShowFriend() {
+        setShowAddFriend((show) => !show);
+    }
+
     return (
         <div className="app">
             <div className="sidebar">
                 <FriendsList />
-                <FormAddFriend />
-                <Button>Add Friend</Button>
+                {showAddFriend && <FormAddFriend />}
+                <Button onClick={handleShowFriend}>
+                    {!showAddFriend ? "Add Friend" : "Close"}
+                </Button>
             </div>
             <FormSplitBill />
         </div>
