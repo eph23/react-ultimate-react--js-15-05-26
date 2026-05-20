@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const KEY = "7b10b00f";
 const tempMovieData = [
@@ -194,29 +194,6 @@ function WatchedMovieList({ watched }) {
     );
 }
 
-// ANCHOR WATCHED BOX
-/* function WatchedBox() {
-    const [watched, setWatched] = useState(tempWatchedData);
-    const [isOpen2, setIsOpen2] = useState(true);
-
-    return (
-        <div className="box">
-            <button
-                className="btn-toggle"
-                onClick={() => setIsOpen2((open) => !open)}
-            >
-                {isOpen2 ? "–" : "+"}
-            </button>
-            {isOpen2 && (
-                <>
-                    <WatchedSummery watched={watched} />
-                    <WatchedMovieList watched={watched} />
-                </>
-            )}
-        </div>
-    );
-} */
-
 // ANCHOR MAIN
 function Main({ children }) {
     return <main className="main">{children}</main>;
@@ -227,9 +204,11 @@ export default function App() {
     const [movies, setMovies] = useState(tempMovieData);
     const [watched, setWatched] = useState(tempWatchedData);
 
-    fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=hulk`)
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+    useEffect(function () {
+        fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=hulk`)
+            .then((response) => response.json())
+            .then((data) => setMovies(data.Search));
+    }, []);
 
     return (
         <>
